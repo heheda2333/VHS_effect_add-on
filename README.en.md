@@ -14,8 +14,16 @@ handled by ffmpeg.
 - Place the files to be processed in the `input` directory
 - Results are written to the `output` directory
 - The `input` directory is read-only: no original file is modified, moved or deleted
-- Sample results are provided in the `example` directory: `before.jpg` is the
-  original image and `after.jpg` is the processed result
+- Before-and-after examples are provided in the `example` directory and sample
+  assets in the `Material` directory; both were filmed and produced by the author
+  of this project — see section 11 for the ownership statement
+
+> Copyright notice: all photos and videos in the `example/` and `Material/`
+> directories were filmed and produced by the author of this project. Copyright
+> is held by the author and no third-party material is involved. Apart from
+> being redistributed together with this tool, they may not be extracted,
+> republished separately or used commercially without permission.
+> See section 11 for details.
 
 ---
 
@@ -353,7 +361,8 @@ The self-test never modifies `input` or `output`; all artifacts are written to
 | --- | --- |
 | `input/` | Photos and videos to process (read-only; never modified) |
 | `output/` | Processing results; subfolders mirror the input names |
-| `example/` | Before-and-after sample: `before.jpg` is the original, `after.jpg` the result |
+| `example/` | Before-and-after examples filmed and produced by the author: `before.*` is the original, `after.*` the result |
+| `Material/` | Sample assets for self-testing and demonstration, filmed and produced by the author |
 | `vhs_processor.py` | Command-line entry point and argument parsing |
 | `gui.py` | Graphical interface |
 | `selftest.py` | Self-test script |
@@ -431,7 +440,85 @@ loop.
 
 ---
 
-## 11. Using as a Library
+## 11. Copyright and Usage Notice
+
+This section outlines copyright considerations that may arise when using this
+tool. It is general information only and does not constitute legal advice; for
+your specific situation, consult a qualified professional.
+
+### 11.1 Rights in input material
+
+The tool only applies image processing to input files and does not change their
+ownership. Users are responsible for ensuring they hold the necessary rights to
+the photos, videos and audio tracks they process. If the material contains
+identifiable persons, third-party music, film excerpts or protected artwork,
+any infringement arising from its use rests with the user.
+
+### 11.2 Ownership of the sample assets
+
+The sample videos and photos in the `Material/` directory, together with the
+before-and-after comparison files in the `example/` directory (both images and
+videos), **were filmed and produced by the author of this project. Copyright in
+these files is held by the author**, and they contain no third-party material.
+
+These files are provided together with this repository for the purposes of
+feature demonstration, effect comparison and self-testing of the tool, and may
+be redistributed together with the tool. Beyond that, they may not be extracted,
+republished separately, or used for any commercial purpose without the author's
+prior written permission. Please acknowledge the source when quoting them.
+
+Users who wish to employ these sample assets for any other purpose must obtain
+the author's permission.
+
+### 11.3 Use of the output
+
+After overlaying on-screen elements such as the "REC" indicator, playback status
+and date/time, the result resembles footage recorded by a real camcorder. Do not
+use processed content to fabricate evidence, misrepresent material as an
+authentic recording, mislead others, or for any other unlawful purpose. Users
+bear responsibility for the consequences of how they use the output.
+
+### 11.4 On-screen elements and trademarks
+
+The "REC", "PLAY" and "SP" labels and icons drawn by this tool are an
+independent implementation of the generic on-screen display conventions used by
+consumer video equipment. They do not reproduce any manufacturer's specific
+interface assets, and no manufacturer's trademarks or logos are used. If you add
+your own or a third party's trademarks to the output, you are responsible for
+obtaining the appropriate permission.
+
+### 11.5 Third-party component licences
+
+The tool uses the following third-party components by invocation. Their licences
+are independent of this project and must be observed when redistributing. The
+licence information below is taken from the metadata shipped with each package:
+
+| Component | Purpose | Licence |
+| --- | --- | --- |
+| NumPy | Numerical operations | BSD 3-Clause |
+| Pillow | Image I/O and text rendering | MIT-CMU |
+| OpenCV (opencv-python-headless) | Blurring and resampling | Apache License 2.0 |
+| imageio-ffmpeg | Python wrapper that supplies the FFmpeg binary | BSD 2-Clause |
+| FFmpeg (bundled by imageio-ffmpeg) | Video encoding and decoding | **GPL v3** (this build enables `--enable-gpl` and `--enable-version3`) |
+
+FFmpeg deserves particular attention: the binary distributed with
+`imageio-ffmpeg` is a **GPL build** that includes GPL components such as libx264
+and libx265. **Redistributing that binary requires compliance with GPL v3**
+(shipping the licence text, providing a way to obtain the corresponding source,
+and so on). This tool invokes FFmpeg as a separate process through its
+command-line interface; that is an invocation between independent programs and
+does not by itself require this project to be licensed under the GPL.
+
+The `libs/` directory is an installation artifact rather than source code.
+Committing it to a public repository would place that GPL binary in the
+repository, so ignoring `libs/`, `_wheels/`, `__pycache__/` and the output
+directories in version control is recommended, letting users obtain their own
+dependencies by running the install script. This avoids most of the licensing
+and size burden.
+
+---
+
+## 12. Using as a Library
 
 ```python
 from vhs_lib import resolve_preset, parse_start_time, VHSContext
