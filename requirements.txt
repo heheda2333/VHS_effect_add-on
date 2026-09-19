@@ -1,0 +1,20 @@
+# VHS_effect_add-on 依赖
+#
+# 推荐安装方式（装进项目自带的 libs/，不污染系统环境）：
+#     python setup_deps.py
+#
+# 或者手动指定目标目录：
+#     python -m pip install --target ./libs -r requirements.txt
+#
+# 或者装到用户环境（需要该目录可写）：
+#     python -m pip install --user -r requirements.txt
+
+numpy>=1.24
+Pillow>=9.5
+
+# --- 强烈建议：没有它们，模糊会退化到很慢的 PIL 实现 ---
+opencv-python-headless>=4.8
+scipy>=1.10
+
+# --- 视频功能必需：自带 ffmpeg 二进制（视频编码 + 保留音轨） ---
+imageio-ffmpeg>=0.4.9

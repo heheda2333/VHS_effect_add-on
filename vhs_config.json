@@ -1,0 +1,6 @@
+{
+  "preset": "classic",
+  "strength": 1.0,
+  "params": {},
+  "_说明": "params 段可覆盖任意参数，例如 {\"luma_noise\": 1.2}；命令行 --set 优先级最高"
+}
